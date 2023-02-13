@@ -38,10 +38,10 @@ public class Robot extends TimedRobot {
 
     lessonmotor.configFactoryDefault();
 
-    lessonmotor.config_kP(0, 0.1, 10);
+    lessonmotor.config_kP(0, 0.04, 10);
     lessonmotor.config_kI(0, 0.0, 10);
-    lessonmotor.config_kD(0, 0.0, 10);
-    lessonmotor.config_kF(0, 0.0, 10);
+    lessonmotor.config_kD(0, 0.01, 10);
+    lessonmotor.config_kF(0, 0.04, 10);
   }
 
   /**
