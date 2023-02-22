@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
 public class LessonSubsystem extends SubsystemBase {
-  /** Creates a new LessonSubsystem. */
+
   public static final WPI_TalonFX lessonMotor = RobotMap.lessonMotor;
   private static final double IN_TO_M = .0254;
   // public static final int MOTOR_ENCODER_COUNTS_PER_REV = 2048; //4096 for CTRE Mag Encoders, 2048 for the Falcons
@@ -30,6 +30,7 @@ public class LessonSubsystem extends SubsystemBase {
     lessonMotor.configPeakOutputReverse(-1, 10);
     lessonMotor.configNeutralDeadband(0.001, 10);
     lessonMotor.configAllowableClosedloopError(0, 0, 10);
+    lessonMotor.configClosedloopRamp(0);
   }
 
   @Override
@@ -38,10 +39,12 @@ public class LessonSubsystem extends SubsystemBase {
   }
 
   public void drive(double command) {
+    //lessonMotor.set(TalonFXControlMode.Velocity, driveSpeedPer100MS*command);
+    lessonMotor.set(TalonFXControlMode.Velocity, command);
+  }
 
-    double driveSpeedPer100MS = (TICKS_PER_METER * (1.0/1000.0) * 100.0); //tick second
-
-    lessonMotor.set(TalonFXControlMode.Velocity, driveSpeedPer100MS*command);
+  public static double getVelocityError(double command) {
+    return getVelocityFeedback() - command;
   }
 
   public static double getPositionFeedback() {
